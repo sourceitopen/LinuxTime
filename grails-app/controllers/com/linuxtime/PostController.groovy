@@ -3,7 +3,7 @@ import grails.converters.JSON
 import grails.plugins.springsecurity.Secured
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import org.codehaus.groovy.grails.plugins.springsecurity.NullSaltSource
-import org.codehaus.groovy.grails.plugins.springsecurity.ui.RegistrationCode
+//import org.codehaus.groovy.grails.plugins.springsecurity.ui.RegistrationCode
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import java.io.File;
 import java.io.FileNotFoundException;
