@@ -29,7 +29,7 @@
 		<div>
 		<div id="txtArea">
 		Complete Your Profile Here</br>
-		<g:form method="post" id="editProfile" controller="tuxers" action="saveProfile">
+		<g:uploadForm method="post" id="editProfile" controller="tuxers" action="saveProfile">
 		First Name<input type="text" name="firstName" value="${profile.firstName}"></br>
 		Last Name<input type="text" name="lastName" value="${profile.lastName}"></br>
 		Bio<g:textArea id="shortBio" name="bio" value="${profile.bio}"/></br>
@@ -37,8 +37,11 @@
 		Country<input type="text" name="country" value="${profile.country}"></br>
 		TimeZone<input type="text" name="timezone" value="${profile.timezone}"></br>
 		Homepage<input type="text" name="homepage" value="${profile.homepage}"></br>
+		<input type="hidden" name="userId" value="${user.id}"></br>
+		<p/>
+		Photo: <input name="photo" type="file" />
 		<g:submitButton name="post" value="Save Profile"/>
-		</g:form>
+		</g:uploadForm>
 		</div>
 		</div>
 		<div class="footer" role="contentinfo">Welcome To LinuxTime</div>

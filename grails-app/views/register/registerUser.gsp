@@ -31,12 +31,12 @@ ${hasErrors(bean:user)}
 		style="padding-left:200px">
 
 		<div style="width: 0px">
-			<label>UserName:</label><input type="text" name="userName"> <label>Password:</label>
-			<input	type="password" name="password"> <label>
-			Retype Password:</label><input type="password" name="repeatPassword"> <label>Country:</label><input
-				type="text" name="country"> &nbsp;<input type="submit"
-				value="Register"> &nbsp;
-			<g:link uri="/">Cancel</g:link>
+			<label>UserName:</label><input type="text" name="userName"> 
+			<label>Password:</label><input type="password" name="password"> <label>
+			Retype Password:</label><input type="password" name="repeatPassword"> 
+			<label>Country:</label><input type="text" name="country"> &nbsp;
+
+			<input type="submit" value="Register"> &nbsp; <g:link uri="/">Cancel</g:link>
 		</div>
 	</g:form>
 

@@ -33,9 +33,8 @@ class TuxersController {
 		[user:user,profile:profile]
 	}
 	def saveProfile = {
-		def user = User.findByUsername(springSecurityService.currentUser.username)
-		log.debug "user found is=="+user
-		log.debug "params are====="+params
+		def fileName
+		def user = User.findById(params.userId)
 		def profile = user.profile
 		log.debug "profile is"+profile
 		if(profile==null){
@@ -50,11 +49,36 @@ class TuxersController {
 			profileValues.country = params.country
 			profileValues.timezone = params.timezone
 			profileValues.email = params.email
+			try{
+				def mhsr = request.getFile('photo')
+				fileName = mhsr.name
+				log.debug "fileName is==="+mhsr.name
+				if(!mhsr?.empty && mhsr.size < 1024*2000){
+					mhsr.transferTo(
+						new File("/home/neuron/sampleuploading/fileName_${user.username}.jpg")
+						)
+				}
+				}catch(FileNotFoundException fnfe){
+				fnfe.printStackTrace()
+				render "path is not available"
+				}
+				profileValues.profilePicName = fileName+"_"+user.username+".jpg"
 			}
 			//render "profile will be saved"
 		redirect controller:'post',action:'showPost',params:[user:springSecurityService.currentUser.username]
 		}
 		}
+	def upload = {
+		log.debug "reached upload action in image controller"
+		log.debug "user received is==="+params.currentUserId
+		def mhsr = request.getFile('photo')
+		if(!mhsr?.empty && mhsr.size < 1024*2000){
+			mhsr.transferTo(
+				new File("/home/neuron/sampleuploading/abcd.jpg")
+				)
+		}
+		redirect(controller:'tuxers',action:'tuxProfile')
+	}
 	@Secured(['ROLE_ADMIN'])
 	def tuxtime = {
 		def role = Role.findAllWhere(authority:'ROLE_USER')

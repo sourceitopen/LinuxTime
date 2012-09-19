@@ -8,7 +8,10 @@ class Profile {
 	String email
 	String timezone
 	String country
+	String profilePicName
 	static belongsTo =[user:User]
     static constraints = {
+		profilePicName(nullable:true)
     }
+	
 }
