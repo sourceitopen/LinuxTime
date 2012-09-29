@@ -36,9 +36,11 @@ def springSecurityService
 		redirect action:'showPost'
 	}
 	def showPost = {
+		String profileImagePath = "/home/neuron/LinuxTime/ProfileImages/"
 		log.debug "user is ="+springSecurityService.currentUser
 		def user = User.findByUsername(springSecurityService.currentUser.username)
-		log.debug "user found is"+user.id
-		[user:user]
+		log.debug "user found is"+user
+		def image = user.profile.profilePicName
+		[user:user,profileImage:image,profileImagePath:profileImagePath]
 	}
 }

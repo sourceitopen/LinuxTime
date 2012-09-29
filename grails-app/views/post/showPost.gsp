@@ -31,7 +31,7 @@ ${hasErrors(bean:post)}
 </g:hasErrors>
 		<div id="grailsLogo" role="banner"><a href="http://grails.org"><img src="${resource(dir: 'images', file: 'grails_logo.png')}" alt="Grails"/></a>
 		<div class="logout">
-		 Welcome! ${user.username} ${user.profile }
+		 Welcome! ${user.username} <img src="${createLink(controller: 'tuxers', action:'displayProfilePic')}" height="100" width="70"/>
 		 <g:link controller="tuxers" action="tuxProfile"> Edit your profile</g:link>
 		<g:link controller="logout"> <img src="${createLinkTo(dir:'images', file: 'logout-tux.png')}" alt="Logout"/></g:link> 
 		</div>
