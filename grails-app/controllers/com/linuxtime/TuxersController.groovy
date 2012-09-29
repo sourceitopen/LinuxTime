@@ -46,7 +46,8 @@ class TuxersController {
 			render "something went wrong please try again"
 		}
 		else{
-			for(def profileValues in profile){
+			saveUserService.saveUserProfile(params,user,profile,request)
+			/*for(def profileValues in profile){
 			profileValues.firstName = params.firstName
 			profileValues.lastName = params.lastName
 			profileValues.bio = params.bio
@@ -68,12 +69,9 @@ class TuxersController {
 				render "path is not available"
 				}
 				profileValues.profilePicName = fileName+"_"+user.username+".jpg"
-			}
+			}*/
 			//render "profile will be saved"
-			def imageList1 = []
-			new File("/home/neuron/LinuxTime/ProfileImages/").eachFileMatch(~/.*?\.jpg/) { imageList1 << it }
-			log.debug "image list is====="+imageList1
-		redirect (controller:'post',action:'showPost',params:[user:springSecurityService.currentUser.username],imageList:imageList1)
+		redirect (controller:'post',action:'showPost',params:[user:springSecurityService.currentUser.username])
 		}
 		}
 	def upload = {

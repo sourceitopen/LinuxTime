@@ -1,7 +1,8 @@
 # Build and Release Folders
 bin-debug/
 bin-release/
-
+target/
+target-eclipse/
 # Project property files
 .actionScriptProperties
 .flexProperties
