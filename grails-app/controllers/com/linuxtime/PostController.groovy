@@ -40,7 +40,10 @@ def springSecurityService
 		log.debug "user is ="+springSecurityService.currentUser
 		def user = User.findByUsername(springSecurityService.currentUser.username)
 		log.debug "user found is"+user
-		def image = user.profile.profilePicName
+		def profile = Profile.findWhere(user:user)
+		log.debug "profile is==="+profile
+		def image = profile.profilePicName
+		log.debug "profile image name is==="+image
 		[user:user,profileImage:image,profileImagePath:profileImagePath]
 	}
 }

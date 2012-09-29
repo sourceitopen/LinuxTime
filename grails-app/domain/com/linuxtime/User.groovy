@@ -12,11 +12,9 @@ class User {
 	boolean accountLocked
 	boolean passwordExpired
 	static hasMany = [posts:Post,tags:Tag,following:User]
-	Profile profile
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
-		profile(nullable:true)
 	}
 
 	static mapping = {

@@ -16,11 +16,13 @@ def saveUser(def receivedParams){
 	}
 	}
 	log.debug "profile is"+profile
-	redirect controller:'post',action:'showPost'
+	//redirect controller:'post',action:'showPost'
+	return true
 	}
 	else{
 	flash.message = "Your Account was not Created. You missed something"
-	redirect action:'registerUser'
+	//redirect action:'registerUser'
+	return false
 	}
 	if(user.hasErrors()){
 		user.errors.each {

@@ -32,64 +32,38 @@ class TuxersController {
 	def tuxProfile = {
 		def user = springSecurityService.currentUser
 		log.debug "current user is====="+user
-		def profile=user.profile
-		log.debug "profile is=="+profile
+		def profile = Profile.findWhere(user:user)
+		log.debug "profile is"+profile
 		[user:user,profile:profile]
 	}
 	def saveProfile = {
 		log.debug "params received are===="+params
 		def fileName
 		def user = User.findById(params.userId)
-		def profile = user.profile
+		def profile = Profile.findWhere(user:user)
 		log.debug "profile is"+profile
 		if(profile==null){
 			render "something went wrong please try again"
 		}
 		else{
 			saveUserService.saveUserProfile(params,user,profile,request)
-			/*for(def profileValues in profile){
-			profileValues.firstName = params.firstName
-			profileValues.lastName = params.lastName
-			profileValues.bio = params.bio
-			profileValues.homepage = params.homepage
-			profileValues.country = params.country
-			profileValues.timezone = params.timezone
-			profileValues.email = params.email
-			try{
-				def mhsr = request.getFile('photo')
-				fileName = mhsr.name
-				log.debug "fileName is==="+mhsr.name
-				if(!mhsr?.empty && mhsr.size < 1024*2000){
-					mhsr.transferTo(
-						new File("/home/neuron/LinuxTime/ProfileImages/${fileName}_${user.username}.jpg")
-						)
-				}
-				}catch(FileNotFoundException fnfe){
-				fnfe.printStackTrace()
-				render "path is not available"
-				}
-				profileValues.profilePicName = fileName+"_"+user.username+".jpg"
-			}*/
 			//render "profile will be saved"
 		redirect (controller:'post',action:'showPost',params:[user:springSecurityService.currentUser.username])
 		}
 		}
-	def upload = {
-		log.debug "reached upload action in image controller"
-		log.debug "user received is==="+params.currentUserId
-		def mhsr = request.getFile('photo')
-		if(!mhsr?.empty && mhsr.size < 1024*2000){
-			mhsr.transferTo(
-				new File("/home/neuron/sampleuploading/abcd.jpg")
-				)
-		}
-		redirect(controller:'tuxers',action:'tuxProfile')
-	}
 	def displayProfilePic = {
 		def user = springSecurityService.currentUser
 		log.debug "current user is====="+user
+		def profile = Profile.findWhere(user:user)
+		log.debug "profile is"+profile
 		String profileImagePath = "/home/neuron/LinuxTime/ProfileImages/"
-		String image = user.profile.profilePicName
+		String image 
+		if(profile.profilePicName==null){
+			image = "linux-logo-large.jpg"
+		}
+		else{
+			image = profile.profilePicName
+		}
 		File imageFile =new File(profileImagePath+image);
 		BufferedImage originalImage=ImageIO.read(imageFile);
 		ByteArrayOutputStream baos=new ByteArrayOutputStream();
@@ -104,7 +78,7 @@ class TuxersController {
 	def tuxtime = {
 		def role = Role.findAllWhere(authority:'ROLE_USER')
 		log.debug "users with role user are"+role
-		def userRole = UserRole.findAllWhere(role:role)
+		def userRole = UserRole.findWhere(role:role)
 		log.debug "users with userrole are"+userRole
 		
 	}

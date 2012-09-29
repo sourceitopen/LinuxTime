@@ -6,8 +6,12 @@ class RegisterController {
 def saveUserService
 def saveUser = {
 	log.debug "params from registercontroller are="+params
-	def returningUser = saveUserService.saveUser(params)
-	log.debug "returning user is==="+returningUser 	
+	boolean returningUser = saveUserService.saveUser(params)
+	log.debug "returning user is==="+returningUser
+	if(returningUser==true)
+	redirect controller:'post',action:'showPost'
+	else
+	redirect action:'registerUser'
 	/*def user = new User(username:params.userName,password:params.password,repeatPassword:params.repeatPassword,country:params.country,enabled:true,accountExpired:false,accountLocked:false,passwordExpired:false)
 	if(user.validate())
 	{
