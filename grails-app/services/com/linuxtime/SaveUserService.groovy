@@ -20,7 +20,7 @@ def saveUser(def receivedParams){
 	return true
 	}
 	else{
-	flash.message = "Your Account was not Created. You missed something"
+	//flash.message = "Your Account was not Created. You missed something"
 	//redirect action:'registerUser'
 	return false
 	}

@@ -9,7 +9,12 @@ class BootStrap {
 		def adminRole = Role.findByAuthority('ROLE_ADMIN')?: new Role(authority:'ROLE_ADMIN').save(failOnError:true)
 		def userRole = Role.findByAuthority('ROLE_USER')?: new Role(authority:'ROLE_USER').save(failOnError:true)
 		log.debug "after saving roles"
-		def user1 = User.findByUsername('arvind')?: new User(username:'arvind',password:'arvind',country:'india',enabled:true,accountExpired:false,accountLocked:false,passwordExpired:false).save(failOnError:true)
+		def user1 = User.findByUsername('arvind')?: new User(username:'arvind',password:'password',repeatPassword:'password',country:'india',enabled:true,accountExpired:false,accountLocked:false,passwordExpired:false).save(failOnError:true)
+		if(user1.hasErrors()){
+			user1.errors.each{
+				println "errors in saving user are==="+it
+			}
+		}
 		if(!user1.authorities.contains(userRole)){
 			UserRole.create user1, userRole,true
 		}
@@ -17,7 +22,7 @@ class BootStrap {
 		def profile_user1 = new Profile(firstName:'',lastName:'',email:'',bio:'',timezone:'',homepage:'',country:'',user:user1,profilePicName:'')
 		profile_user1.save()
 		log.debug "after saving profile 1"
-		def user2 = User.findByUsername('admin')?: new User(username:'admin',password:'admin',country:'india',enabled:true,accountExpired:false,accountLocked:false,passwordExpired:false).save(failOnError:true)
+		def user2 = User.findByUsername('admin')?: new User(username:'admin',password:'password',repeatPassword:'password',country:'india',enabled:true,accountExpired:false,accountLocked:false,passwordExpired:false).save(failOnError:true)
 		log.debug "after saving user 2"
 		def profile_user2 = new Profile(firstName:'',lastName:'',email:'',bio:'',timezone:'',homepage:'',country:'',user:user2,profilePicName:'')
 		profile_user2.save()

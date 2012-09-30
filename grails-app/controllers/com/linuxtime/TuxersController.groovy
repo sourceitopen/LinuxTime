@@ -57,6 +57,7 @@ class TuxersController {
 		def profile = Profile.findWhere(user:user)
 		log.debug "profile is"+profile
 		String profileImagePath = "/home/neuron/LinuxTime/ProfileImages/"
+		//String profileImagePath = grailsApplication.grails.profile.images.path
 		String image 
 		if(profile.profilePicName==null){
 			image = "linux-logo-large.jpg"

@@ -104,3 +104,4 @@ grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.linuxtime.Us
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.linuxtime.UserRole'
 grails.plugins.springsecurity.authority.className = 'com.linuxtime.Role'
 grails.plugins.springsecurity.sucessHandler.defaultTargetUrl='/'
+grails.profile.images.path = "/home/neuron/LinuxTime/ProfileImages/"

@@ -10,33 +10,9 @@ def saveUser = {
 	log.debug "returning user is==="+returningUser
 	if(returningUser==true)
 	redirect controller:'post',action:'showPost'
-	else
-	redirect action:'registerUser'
-	/*def user = new User(username:params.userName,password:params.password,repeatPassword:params.repeatPassword,country:params.country,enabled:true,accountExpired:false,accountLocked:false,passwordExpired:false)
-	if(user.validate())
-	{
-	user.save(flush:true)
-	def role = new UserRole(user:user,role:Role.findWhere(authority:'ROLE_USER'))
-	role.save()
-	def profile = new Profile(firstName:'',lastName:'',email:'',bio:'',timezone:'',homepage:'',country:'',user:user)
-	profile.save()
-	if(profile.hasErrors()){
-	profile.errors.each{
-	println "profile has error"+it
-	}
-	}
-	log.debug "profile is"+profile
-	redirect controller:'post',action:'showPost'
-	}
 	else{
-	flash.message = "Your Account was not Created. You missed something"
+	flash.message = "somthing went wrong"	
 	redirect action:'registerUser'
 	}
-	if(user.hasErrors()){
-		user.errors.each {
-			println "errors saving user===="+it
-		}
-	}*/
-	
 }
 }
