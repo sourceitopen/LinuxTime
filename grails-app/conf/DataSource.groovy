@@ -1,4 +1,4 @@
-dataSource {
+/*dataSource {
     pooled = true
     driverClassName = "com.mysql.jdbc.Driver"
     username = "root"
@@ -40,4 +40,15 @@ environments {
             }
         }
     }
+}
+*/
+
+grails {
+	mongo {
+		host = "localhost"
+		port = 27017
+		username = "neuron"
+		password = "pro@1989"
+		databaseName = "linuxtime"
+	}
 }

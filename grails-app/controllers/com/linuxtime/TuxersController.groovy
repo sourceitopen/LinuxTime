@@ -40,7 +40,7 @@ class TuxersController {
 		log.debug "params received are===="+params
 		def fileName
 		def user = User.findById(params.userId)
-		def profile = Profile.findWhere(user:user)
+		def profile = Profile.findByUser(user)
 		log.debug "profile is"+profile
 		if(profile==null){
 			render "something went wrong please try again"
@@ -65,6 +65,7 @@ class TuxersController {
 		else{
 			image = profile.profilePicName
 		}
+		try{
 		File imageFile =new File(profileImagePath+image);
 		BufferedImage originalImage=ImageIO.read(imageFile);
 		ByteArrayOutputStream baos=new ByteArrayOutputStream();
@@ -74,6 +75,9 @@ class TuxersController {
 		response.contentType = 'image/jpg' // or the appropriate image content type
 		response.outputStream << imageInByte
 		response.outputStream.flush()
+		}catch(Exception e){
+		e.printStackTrace()
+		}		
 	}
 	@Secured(['ROLE_ADMIN'])
 	def tuxtime = {

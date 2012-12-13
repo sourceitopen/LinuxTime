@@ -24,14 +24,14 @@ class SaveUserService{
 	}
 	def saveUserProfile(params,user,profile,request){
 		def fileName
-		for(def profileValues in profile){
-			profileValues.firstName = params.firstName
-			profileValues.lastName = params.lastName
-			profileValues.bio = params.bio
-			profileValues.homepage = params.homepage
-			profileValues.country = params.country
-			profileValues.timezone = params.timezone
-			profileValues.email = params.email
+		
+			profile.firstName = params.firstName
+			profile.lastName = params.lastName
+			profile.bio = params.bio
+			profile.homepage = params.homepage
+			profile.country = params.country
+			profile.timezone = params.timezone
+			profile.email = params.email
 			try{
 				def mhsr = request.getFile('photo')
 				fileName = mhsr.name
@@ -49,7 +49,7 @@ class SaveUserService{
 				mpe.printStackTrace()
 				render "path is not available"
 			}
-			profileValues.profilePicName = fileName+"_"+user.username+".jpg"
+			profile.profilePicName = fileName+"_"+user.username+".jpg"
+			profile.save()
 		}
-	}
 }
